@@ -1,0 +1,22 @@
+#!/bin/bash
+nasm -f elf32 sseutils32.nasm
+nasm -f elf32 ripristinaVetZero32.nasm
+nasm -f elf32 tuttiX32.nasm
+nasm -f elf32 calcoloXastGradoMaggioreDue32.nasm
+nasm -f elf32 calcoloXastGradoMaggioreDueUnroll32.nasm
+nasm -f elf32 inizializzaGradoUno32.nasm
+nasm -f elf32 inizializzaGradoUnoUnroll32.nasm
+nasm -f elf32 inizializzaVetAZero32.nasm
+nasm -f elf32 calcoloPTheta32.nasm
+nasm -f elf32 prodottoErrorexEtaxXast32.nasm
+nasm -f elf32 calcoloPThetaAdagrad32.nasm
+nasm -f elf32 calcoloParziale32.nasm
+
+
+gcc -m32 -msse -O0 -no-pie sseutils32.o tuttiX32.o ripristinaVetZero32.o calcoloXastGradoMaggioreDue32.o calcoloXastGradoMaggioreDueUnroll32.o inizializzaGradoUno32.o inizializzaGradoUnoUnroll32.o inizializzaVetAZero32.o calcoloPTheta32.o prodottoErrorexEtaxXast32.o calcoloParziale32.o calcoloPThetaAdagrad32.o regression32c.c -o regression32c -lm
+
+pars="";
+for arg; do pars=$pars" "$arg; done;
+./regression32c $pars
+
+

@@ -1,0 +1,21 @@
+#!/bin/bash
+nasm -f elf64 sseutils64.nasm
+nasm -f elf64 ripristinaVetZero64.nasm
+nasm -f elf64 tuttiX64.nasm
+nasm -f elf64 calcoloXastGradoMaggioreDue64.nasm
+nasm -f elf64 calcoloXastGradoMaggioreDueUnroll64.nasm
+nasm -f elf64 inizializzaGradoUno64.nasm
+nasm -f elf64 inizializzaGradoUnoUnroll64.nasm
+nasm -f elf64 inizializzaVetAZero64.nasm
+nasm -f elf64 calcoloPTheta64.nasm
+nasm -f elf64 prodottoErrorexEtaxXast64.nasm
+nasm -f elf64 calcoloPThetaAdagrad64.nasm
+nasm -f elf64 calcoloParziale64.nasm
+
+gcc -m64 -msse -O0 -no-pie sseutils64.o tuttiX64.o ripristinaVetZero64.o calcoloXastGradoMaggioreDue64.o calcoloXastGradoMaggioreDueUnroll64.o inizializzaGradoUno64.o inizializzaGradoUnoUnroll64.o inizializzaVetAZero64.o calcoloPTheta64.o prodottoErrorexEtaxXast64.o calcoloParziale64.o calcoloPThetaAdagrad64.o regression64c.c -o regression64c -lm
+
+pars="";
+for arg; do pars=$pars" "$arg; done;
+./regression64c $pars
+
+

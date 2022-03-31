@@ -1,0 +1,22 @@
+#!/bin/bash
+nasm -f elf32 sseutils32.nasm
+nasm -f elf32 ripristinaVetZero32omp.nasm
+nasm -f elf32 tuttiX32omp.nasm
+nasm -f elf32 calcoloXastGradoMaggioreDue32omp.nasm
+nasm -f elf32 calcoloXastGradoMaggioreDueUnroll32omp.nasm
+nasm -f elf32 inizializzaGradoUno32omp.nasm
+nasm -f elf32 inizializzaGradoUnoUnroll32omp.nasm
+nasm -f elf32 inizializzaVetAZero32omp.nasm
+nasm -f elf32 calcoloPTheta32omp.nasm
+nasm -f elf32 prodottoErrorexEtaxXast32omp.nasm
+nasm -f elf32 calcoloPThetaAdagrad32omp.nasm
+nasm -f elf32 calcoloParziale32omp.nasm
+
+
+gcc -m32 -msse -O0 -no-pie -fopenmp sseutils32.o tuttiX32omp.o ripristinaVetZero32omp.o calcoloXastGradoMaggioreDue32omp.o calcoloXastGradoMaggioreDueUnroll32omp.o inizializzaGradoUno32omp.o inizializzaGradoUnoUnroll32omp.o inizializzaVetAZero32omp.o calcoloPTheta32omp.o prodottoErrorexEtaxXast32omp.o calcoloParziale32omp.o calcoloPThetaAdagrad32omp.o regression32comp.c -o regression32omp -lm
+
+pars="";
+for arg; do pars=$pars" "$arg; done;
+./regression32omp $pars
+
+
